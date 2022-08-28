@@ -1,6 +1,6 @@
 ---
-title: Làm sao để dùng React Hook trong Class Component
-description: Làm sao để dùng React Hook trong Class Component
+title: Làm thế nào để dùng React Hook trong Class Component?
+description: Làm thế nào để dùng React Hook trong Class Component?
 date: 2022-06-30
 banner: ./class-hook.jpeg
 tags:
@@ -13,7 +13,7 @@ import Attribution from 'components/Attribution'
 
 <Attribution name="infinum" url="https://infinum.com/" />
 
-### Làm sao để dùng React Hook trong Class Component
+### Làm thế nào để dùng React Hook trong Class Component?
 
 Bạn không thể sử dụng React Hook trực tiếp trong class component nhưng hoàn toàn có thể sử dụng nó trong wrapped function component với [render prop](https://reactjs.org/docs/render-props.html).
 
@@ -45,28 +45,15 @@ export function useDarkMode() {
 
 Tạo một component với `render` prop.
 ```javascript
-import { useEffect, useState } from "react";
+// I wouldn't normally call a component something like this.
+// It's just to convey what it is doing for the purpose of the article
+const UseDarkModeHookWrapperComponent = ({ render }) => {
+  const [darkMode, setDarkMode] = useDarkMode(false);
 
-export function useDarkMode() {
-  // Taken from https://usehooks.com/useDarkMode/
-
-  // For this to persist, we'd use localStorage or some other kind
-  // of way to persist between sessions.
-  // see e.g. https://usehooks.com/useLocalStorage/
-  const [enabledState, setEnabledState] = useState(false);
-  const enabled = enabledState;
-
-  useEffect(() => {
-    const className = "dark-mode";
-    const element = document.body;
-    if (enabled) {
-      element.classList.add(className);
-    } else {
-      element.classList.remove(className);
-    }
-  }, [enabled]);
-  return [enabled, setEnabledState];
-}
+  // Uses the render prop called render that will expose the value and
+  // setter for the custom hook
+  return render(darkMode, setDarkMode);
+};
 ```
 Rồi wrap nó lại trong một class component.
 ```javascript

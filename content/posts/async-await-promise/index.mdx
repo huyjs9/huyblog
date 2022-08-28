@@ -2,14 +2,17 @@
 title: Async/Await vs Promise
 description: Async/Await vs Promise
 date: 2022-08-28
-banner: ./asvspr.png
+banner: ./promise.webp
 tags:
   - React Hooks
 ---
 
-<img src="./asvspr.png" />
+<img src="./asvspr.png" width="100%" />
 
-<Attribution name="DLT Labs" url="https://blog.devgenius.io/how-do-differences-in-promise-chains-and-async-await-affect-your-code-logic-b85aeb566ebb" />
+<Attribution
+	name="DLT Labs"
+	url="https://blog.devgenius.io/how-do-differences-in-promise-chains-and-async-await-affect-your-code-logic-b85aeb566ebb"
+/>
 
 import GifPlayer from 'components/GifPlayer';
 
@@ -117,3 +120,45 @@ callback();
 ```
 
 Use case for throttle: https://codepen.io/tutsplus/pen/yLgmvbX
+
+## 5. setInterval(callback, delay)
+
+### setInterval overview
+
+- **What**: exec callback every period of time until it's cleared by clearInterval.
+- **When**: do something repeatly.
+- **Where**: working both browser and nodejs.
+
+```javascript
+const timeoutId = setTimeout(callback, timeout);
+// callback is the function will be executed once the timer is expired // timeout is the time in milliseconds, default to 0. 1 second = 1000 milliseconds
+// timeoutId is a positive integer, used to identify a timeout
+// and clear it by using clearTimeout(timeoutId)
+```
+
+### clearInterval
+
+```javascript
+const intervalId = setInterval(() => {
+	console.log('Hey, are you there?');
+}, 2000);
+clearInterval(intervalId);
+```
+
+> NOTE: `setInterval()` and `setTimeout()` share the same pool of IDs.
+
+### Example with countdown
+
+```javascript
+function countdown(seconds) {
+	let currentSecond = seconds;
+	const intervalId = setInterval(() => {
+		console.log(currentSecond);
+		if (currentSecond <= 0) {
+			clearInterval(intervalId);
+		}
+		currentSecond -= 1;
+	}, 1000);
+}
+countdown(10);
+```
