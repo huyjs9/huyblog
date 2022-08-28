@@ -186,6 +186,7 @@ module.exports = {
           {
             serialize: ({ query: { site, allPost } }) => {
               return allPost.nodes.map((post) => {
+                const url = site.siteMetadata.siteUrl + post.slug
                 const content = `<p>${post.excerpt}</p><div style="margin-top: 50px; font-style: italic;"><strong><a href="${url}">Keep reading</a>.</strong></div><br /> <br />`
 
                 return {
@@ -193,7 +194,7 @@ module.exports = {
                   date: post.date,
                   description: post.description,
 									excerpt: post.excerpt,
-                  url: site.siteMetadata.siteUrl + post.slug,
+                  url,
                   guid: site.siteMetadata.siteUrl + post.slug,
                   custom_elements: [{ 'content:encoded': content }],
                 }
