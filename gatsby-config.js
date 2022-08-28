@@ -55,8 +55,8 @@ module.exports = {
 				],
 			},
 		},
-    // ! Comment here for gatsby debugging
-    // https://github.com/gatsbyjs/gatsby/discussions/34421
+		// ! Comment here for gatsby debugging
+		// https://github.com/gatsbyjs/gatsby/discussions/34421
 		// {
 		// 	resolve: `gatsby-plugin-mdx`,
 		// 	options: {
