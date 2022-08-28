@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Divider, Link } from '@theme-ui/components'
 
+
 import SmallCentered from './SmallCentered'
 
 type Props = {

@@ -71,7 +71,7 @@ const CardListItem = ({
   return (
     <Card
       {...sal}
-      sx={(t) => ({
+      sx={(t: any) => ({
         borderRadius: '12px',
         border: `2px solid ${t.colors.background}`,
         padding: '8px',

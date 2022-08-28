@@ -16,6 +16,8 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@dhaiwat10/react-link-preview": "^1.14.2",
+    "@docsearch/react": "^3.2.1",
     "@lekoarts/gatsby-theme-minimal-blog": "^4.0.0",
     "@loadable/component": "^5.15.2",
     "gatsby": "^4.18.2",

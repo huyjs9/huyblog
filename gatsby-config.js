@@ -65,6 +65,10 @@ module.exports = {
 						slug: `/blog`,
 					},
 					{ title: `Tags`, slug: `/tags` },
+          {
+						title: `Reading List`,
+						slug: `/reading-list`,
+					},
 					{
 						title: `About`,
 						slug: `/about`,
@@ -169,7 +173,7 @@ module.exports = {
               }
             `,
 						output: `rss.xml`,
-						title: `Minimal Blog - @lekoarts/gatsby-theme-minimal-blog`,
+						title: `Huy Bui's Blog`,
 					},
 				],
 			},
