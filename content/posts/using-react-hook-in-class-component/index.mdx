@@ -1,0 +1,99 @@
+---
+title: Làm sao để dùng React Hook trong Class Component
+description: Làm sao để dùng React Hook trong Class Component
+date: 2022-06-30
+banner: ./class-hook.jpeg
+tags:
+  - React Hooks
+---
+
+import Attribution from 'components/Attribution'
+
+<img src="./class-hook.jpeg" />
+
+<Attribution name="infinum" url="https://infinum.com/" />
+
+### Làm sao để dùng React Hook trong Class Component
+
+Bạn không thể sử dụng React Hook trực tiếp trong class component nhưng hoàn toàn có thể sử dụng nó trong wrapped function component với [render prop](https://reactjs.org/docs/render-props.html).
+
+Đầu tiên, tạo một hook
+```javascript
+import { useEffect, useState } from "react";
+
+export function useDarkMode() {
+  // Taken from https://usehooks.com/useDarkMode/
+
+  // For this to persist, we'd use localStorage or some other kind
+  // of way to persist between sessions.
+  // see e.g. https://usehooks.com/useLocalStorage/
+  const [enabledState, setEnabledState] = useState(false);
+  const enabled = enabledState;
+
+  useEffect(() => {
+    const className = "dark-mode";
+    const element = document.body;
+    if (enabled) {
+      element.classList.add(className);
+    } else {
+      element.classList.remove(className);
+    }
+  }, [enabled]);
+  return [enabled, setEnabledState];
+}
+```
+
+Tạo một component với `render` prop.
+```javascript
+import { useEffect, useState } from "react";
+
+export function useDarkMode() {
+  // Taken from https://usehooks.com/useDarkMode/
+
+  // For this to persist, we'd use localStorage or some other kind
+  // of way to persist between sessions.
+  // see e.g. https://usehooks.com/useLocalStorage/
+  const [enabledState, setEnabledState] = useState(false);
+  const enabled = enabledState;
+
+  useEffect(() => {
+    const className = "dark-mode";
+    const element = document.body;
+    if (enabled) {
+      element.classList.add(className);
+    } else {
+      element.classList.remove(className);
+    }
+  }, [enabled]);
+  return [enabled, setEnabledState];
+}
+```
+Rồi wrap nó lại trong một class component.
+```javascript
+export default class App extends Component {
+  render() {
+    return (
+      <UseDarkModeHookWrapperComponent
+        render={(darkMode, setDarkMode) => {
+          return (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "200px",
+                gap: "2rem",
+                maxWidth: "50%",
+                placeItems: "center"
+              }}
+            >
+              <ThemeToggler darkMode={darkMode} setDarkMode={setDarkMode} />
+              hello
+            </div>
+          );
+        }}
+      />
+    );
+  }
+}
+```
+
+Ví dụ thực tế với [useMediaQuery hook](https://github.com/forem/forem/blob/main/app/javascript/shared/components/useMediaQuery.js), [wrapper component](https://github.com/forem/forem/blob/main/app/javascript/shared/components/MediaQuery.jsx). [Đây](https://github.com/forem/forem/blob/main/app/javascript/readingList/readingList.jsx#L240-L277) là cách nó hoạt động.
