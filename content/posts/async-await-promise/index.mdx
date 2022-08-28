@@ -1,0 +1,119 @@
+---
+title: Async/Await vs Promise
+description: Async/Await vs Promise
+date: 2022-08-28
+banner: ./asvspr.png
+tags:
+  - React Hooks
+---
+
+<img src="./asvspr.png" />
+
+<Attribution name="DLT Labs" url="https://blog.devgenius.io/how-do-differences-in-promise-chains-and-async-await-affect-your-code-logic-b85aeb566ebb" />
+
+import GifPlayer from 'components/GifPlayer';
+
+## 1. Tổng quan về lập trình bất đồng bộ
+
+### Single thread vs Multi thread
+
+|                                   | Single Thread | Multi Thread |
+| --------------------------------- | ------------- | ------------ |
+| How many task performed at a time | One           | Many         |
+| Resource sharing                  | No            | Yes          |
+
+**Javscript** is a **single thread** programming language.
+
+### Sync vs Async
+
+<img src="./sync-async.png" />
+
+## 2. setTimeout()
+
+<img src="./setTimeout.gif" alt="setTimeout" loading="lazy" />
+
+### setTimeout overview
+
+- **What**: a global method to set a timer, then **exec a function** when the **timer is expired**.
+- **When**: you want to run a function after period time.
+- **Where**: working both browser and nodejs.
+
+```javascript
+const timeoutId = setTimeout(callback, timeout);
+// callback is the function will be executed once the timer is expired // timeout is the time in milliseconds, default to 0. 1 second = 1000 milliseconds
+// timeoutId is a positive integer, used to identify a timeout
+// and clear it by using clearTimeout(timeoutId)
+```
+
+### clearTimeout
+
+```javascript
+const timeoutId = setTimeout(() => {
+	console.log('Tada!!!');
+}, 5000);
+clearTimeout(timeoutId); // cancel the timeout // should be called before the timeout expired
+```
+
+### Late timeout
+
+The timeout can also fire later than expected if the page (or the OS/browser) is busy with other tasks.
+
+```javascript
+setTimeout(() => {
+	console.log('Tada!!!');
+});
+let count = 1;
+for (let i = 0; i < 1e9; i++) {
+	count++;
+}
+console.log('Done');
+```
+
+Link bài viết:
+
+- https://dev.to/lydiahallie/javascript-visualized-event-loop-3dif
+- https://dev.to/lydiahallie/javascript-visualized-promises-async-await-5gke
+
+## 3. debounce
+
+### How it works
+
+- debounce exec function after period of time receiving no trigger
+
+### Simple implementation
+
+```javascript
+function debounce(callback, wait) {
+	let timeoutId;
+	return function () {
+		if (timeoutId) {
+			clearTimeout(timeoutId);
+		}
+		timeoutId = setTimeout(callback, wait);
+	};
+}
+```
+
+Use case for debounce: https://codepen.io/tutsplus/pen/VwPoQpR
+
+## 4. Throttle
+
+### How it works
+
+- throttle trigger max 1 call every period time.
+
+### Simple implementation
+
+```javascript
+function throttle(callback, wait) {
+  let isThrottling = false;
+return function () {
+if (isThrottling) return; // 2, 3, 4 come here
+isThrottling = true; // 1 come here setTimeout(() => {
+callback();
+      isThrottling = false;
+    }, wait);
+}; }
+```
+
+Use case for throttle: https://codepen.io/tutsplus/pen/yLgmvbX
