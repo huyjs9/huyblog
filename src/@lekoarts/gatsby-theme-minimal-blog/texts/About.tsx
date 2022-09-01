@@ -4,8 +4,8 @@ import { Text, Link, Box } from 'theme-ui';
 const About = () => (
 	<Box sx={{ display: ['block', 'block', 'flex'], marginBottom: '50px' }}>
 		<img
-			src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t39.30808-6/296737361_1859130714290769_6951862618415401469_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=bM8H9KpXVtgAX_QQN-X&_nc_ht=scontent.fsgn4-1.fna&oh=00_AT8xkpN-7Hcn5l0ATRJ6V1JtyF05TvZksFtqwvEAOwn7jA&oe=630EBD5A"
-			alt="TkDodo"
+			src="./avatar.jpg"
+			alt="huybt"
 			style={{
 				marginRight: '0.875rem',
 				marginTop: '0.5rem',
