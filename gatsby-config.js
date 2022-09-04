@@ -11,7 +11,7 @@ module.exports = {
     siteTitle: "Huy Bui's blog",
     siteTitleAlt: `Huy Bui's blog`,
     siteHeadline: `Huy Bui's blog`,
-    siteUrl: `https://huybt-blog.vercel.app`,
+    siteUrl: `https://huyblog.vercel.app`,
     siteDescription: `A technical blog about frontend-development.`,
     siteLanguage: `en`,
     author: '@huyjs9',
