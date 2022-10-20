@@ -123,6 +123,7 @@ module.exports = {
     {
       resolve: `gatsby-omni-font-loader`,
       options: {
+        mode: 'async',
         enableListener: true,
         preconnect: [`https://fonts.gstatic.com`],
         // If you plan on changing the font you'll also need to adjust the Theme UI config to edit the CSS
@@ -193,7 +194,7 @@ module.exports = {
                   title: post.title,
                   date: post.date,
                   description: post.description,
-									excerpt: post.excerpt,
+                  excerpt: post.excerpt,
                   url,
                   guid: site.siteMetadata.siteUrl + post.slug,
                   custom_elements: [{ 'content:encoded': content }],
