@@ -32,5 +32,5 @@ jobs:
             IS_FAIL=1
           fi
 
-          echo "$TESTS_LOG"
           echo "::set-output name=tests::$IS_FAIL"
+          echo "$TESTS_LOG"
