@@ -3,7 +3,7 @@ name: Preview Testing
 on:
   pull_request:
     branches:    
-      - master
+      - staging
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
         timeout-minutes: 5 # See https://github.com/actions/cache/issues/810
         with:
           node-version-file: '.nvmrc'
-          # cache: 'npm'
+          cache: 'npm'
       - name: Install packages
         run: npm install
       - name: Testing all pages
