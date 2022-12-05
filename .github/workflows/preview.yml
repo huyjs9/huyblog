@@ -13,6 +13,8 @@ jobs:
   test:
     name: Cypress tests
     runs-on: ubuntu-latest
+    outputs:
+      tests: ${{ steps['set-tests'].outputs['tests'] }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -24,20 +26,20 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           # cache: 'npm'
-      # - name: Install packages
-      #   uses: npm install
-      # - name: Testing all pages
-      #   id: set-tests
-      #   run: |
-      #     TESTS_LOG=$(npm run cy:run)
-      #     IS_FAIL=0
+      - name: Install packages
+        run: npm install
+      - name: Testing all pages
+        id: set-tests
+        run: |
+          TESTS_LOG=$(npm run cy:run)
+          IS_FAIL=0
 
-      #     if [ "$?" -ne 0 ]; then
-      #       IS_FAIL=1
-      #     fi
+          if [ "$?" -ne 0 ]; then
+            IS_FAIL=1
+          fi
 
-      #     echo "$TESTS_LOG"
-      #     echo "::set-output name=tests::$IS_FAIL"
+          echo "$TESTS_LOG"
+          echo "::set-output name=tests::$IS_FAIL"
 
   deploy-staging:
     name: Deploy Staging
