@@ -6,20 +6,50 @@ env:
 
 on:
   pull_request:
-    # Sequence of patterns matched against refs/heads
     branches:    
       - master
 
 jobs:
-  deploy-staging:
-    name: Deploy Staging
+  test:
+    name: Cypress tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
-      - name: Setup Node
+      - name: Setup node
+        uses: actions/setup-node@v3
+        timeout-minutes: 5 # See https://github.com/actions/cache/issues/810
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - name: Install packages
+        uses: npm install
+      - name: Testing all pages
+        id: set-tests
+        run: |
+          TESTS_LOG=$(npm run cypress:test-w3)
+          IS_FAIL=0
+
+          if [ "$?" -ne 0 ]; then
+            IS_FAIL=1
+          fi
+
+          echo "$TESTS_LOG"
+          echo "::set-output name=tests::$IS_FAIL"
+
+  deploy-staging:
+    name: Deploy Staging
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Setup node
         uses: actions/setup-node@v3
         timeout-minutes: 5 # See https://github.com/actions/cache/issues/810
         with:
