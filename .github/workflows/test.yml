@@ -2,7 +2,7 @@ name: Preview Testing
 
 on:
   pull_request:
-    branches:    
+    branches:
       - staging
 
 jobs:
@@ -37,12 +37,12 @@ jobs:
           echo "$TESTS_LOG"
           echo "::set-output name=tests::$IS_FAIL"
 
-    logging:
-      name: Logging
-      runs-on: ubuntu-latest
-      needs:
-        - test
-      steps:
-        - name: Output logs
-          run: |
-            echo "${{ needs.test.outputs['tests'] }}"
+  logging:
+    name: Logging
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - name: Output logs
+        run: |
+          echo "${{ needs.test.outputs['tests'] }}"
