@@ -1,4 +1,4 @@
-name: Vercel Preview Deployment
+name: Preview Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -11,7 +11,6 @@ on:
       - master
 
 jobs:
-
   deploy-staging:
     name: Deploy Staging
     runs-on: ubuntu-latest
