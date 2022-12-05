@@ -4,7 +4,7 @@ name: Schedule Job
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 11 * * * *" # Run on 18:30 Asia/Ho Chi Minh
+    - cron: "30 11 * * *" # Run on 18:30 Asia/Ho Chi Minh
 
 jobs:
   call-test:
