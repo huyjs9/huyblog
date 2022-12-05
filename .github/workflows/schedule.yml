@@ -1,0 +1,18 @@
+name: Schedule Job
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 11 * * *"
+
+jobs:
+  call-test:
+    uses: ./.github/workflows/test.yml
+
+  call-deploy:
+    if: ${{ needs.['call-test'].outputs['tests'] != '1' }}
+    needs:
+      - call-test
+    uses: ./.github/workflows/preview.yml
+
+

@@ -1,16 +1,24 @@
 name: Preview Testing
 
+# https://docs.github.com/en/actions/using-workflows/reusing-workflows
 on:
+  workflow_call:
+    # Map the workflow outputs to job outputs
+    outputs:
+      tests:
+        description: "The output of the Cypress Tests"
+        value: ${{ jobs.['cypress-test'].outputs.tests }}
+
   pull_request:
     branches:
       - staging
 
 jobs:
-  test:
-    name: Cypress tests
+  cypress-test:
+    name: Cypress run
     runs-on: ubuntu-latest
     outputs:
-      tests: ${{ steps['set-tests'].outputs['tests'] }}
+      tests: ${{ steps['set-tests'].outputs.['tests'] }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -24,6 +32,7 @@ jobs:
           cache: 'npm'
       - name: Install packages
         run: npm install
+      # See https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
       - name: Testing all pages
         id: set-tests
         run: |
@@ -35,14 +44,5 @@ jobs:
           fi
 
           echo "$TESTS_LOG"
-          echo "::set-output name=tests::$IS_FAIL"
+          echo "tests=${IS_FAIL}"
 
-  logging:
-    name: Logging
-    runs-on: ubuntu-latest
-    needs:
-      - test
-    steps:
-      - name: Output logs
-        run: |
-          echo "${{ needs.test.outputs['tests'] }}"
