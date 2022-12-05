@@ -5,6 +5,7 @@ env:
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
 on:
+  workflow_call:
   push:
     branches:
       - 'staging'
