@@ -8,6 +8,10 @@ on:
   push:
     branches-ignore:
       - master
+  pull_request:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      - master
 
 jobs:
 
