@@ -24,8 +24,8 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
-      - name: Install packages
-        uses: npm install
+      # - name: Install packages
+      #   uses: npm install
       # - name: Testing all pages
       #   id: set-tests
       #   run: |
