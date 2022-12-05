@@ -26,18 +26,18 @@ jobs:
           cache: 'npm'
       - name: Install packages
         uses: npm install
-      - name: Testing all pages
-        id: set-tests
-        run: |
-          TESTS_LOG=$(npm run cy:run)
-          IS_FAIL=0
+      # - name: Testing all pages
+      #   id: set-tests
+      #   run: |
+      #     TESTS_LOG=$(npm run cy:run)
+      #     IS_FAIL=0
 
-          if [ "$?" -ne 0 ]; then
-            IS_FAIL=1
-          fi
+      #     if [ "$?" -ne 0 ]; then
+      #       IS_FAIL=1
+      #     fi
 
-          echo "$TESTS_LOG"
-          echo "::set-output name=tests::$IS_FAIL"
+      #     echo "$TESTS_LOG"
+      #     echo "::set-output name=tests::$IS_FAIL"
 
   deploy-staging:
     name: Deploy Staging
