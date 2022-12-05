@@ -7,7 +7,7 @@ on:
     outputs:
       tests:
         description: "The output of the Cypress Tests"
-        value: ${{ jobs.['cypress-test'].outputs.tests }}
+        value: ${{ jobs['cypress-test'].outputs.['tests'] }}
 
   pull_request:
     branches:
@@ -18,7 +18,7 @@ jobs:
     name: Cypress run
     runs-on: ubuntu-latest
     outputs:
-      tests: ${{ steps['set-tests'].outputs.['tests'] }}
+      tests: ${{ steps['set-tests'].outputs['tests'] }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3

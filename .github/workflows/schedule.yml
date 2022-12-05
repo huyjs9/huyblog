@@ -10,7 +10,7 @@ jobs:
     uses: ./.github/workflows/test.yml
 
   call-deploy:
-    if: ${{ needs.['call-test'].outputs['tests'] != '1' }}
+    if: ${{ needs['call-test'].outputs['tests'] != '1' }}
     needs:
       - call-test
     uses: ./.github/workflows/preview.yml
