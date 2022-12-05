@@ -37,7 +37,7 @@ jobs:
           echo "$TESTS_LOG"
           echo "::set-output name=tests::$IS_FAIL"
 
-    log:
+    logging:
       name: Logging
       runs-on: ubuntu-latest
       needs:
