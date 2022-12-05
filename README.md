@@ -1,4 +1,6 @@
 ## 🚀 Getting Started
+[![Preview Deployment](https://github.com/huyjs9/huyblog/actions/workflows/preview.yml/badge.svg)](https://github.com/huyjs9/huyblog/actions/workflows/preview.yml)
+
 ### 1. **Create a Gatsby site.**
 
 Use `git` to clone the site and navigate into it:

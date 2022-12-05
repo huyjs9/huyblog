@@ -1,0 +1,6 @@
+{
+	"pageLoadTimeout": 300000,
+	"video": false,
+	"videoUploadOnPasses": false,
+	"screenshotOnRunFailure": false
+}
