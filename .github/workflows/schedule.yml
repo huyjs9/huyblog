@@ -1,9 +1,10 @@
 name: Schedule Job
 
+# https://jasonet.co/posts/scheduled-actions/
 on:
   workflow_dispatch:
   schedule:
-    - cron: "10 11 * * *"
+    - cron: "*/5 * * * *"
 
 jobs:
   call-test:
