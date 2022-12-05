@@ -23,7 +23,7 @@ jobs:
         timeout-minutes: 5 # See https://github.com/actions/cache/issues/810
         with:
           node-version-file: '.nvmrc'
-          cache: 'npm'
+          # cache: 'npm'
       # - name: Install packages
       #   uses: npm install
       # - name: Testing all pages
