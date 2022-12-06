@@ -9,6 +9,7 @@ on:
     branches:
       - master
   workflow_dispatch:
+    ref: master
 
 # See https://github.com/vercel/vercel/blob/main/.github/workflows/test.yml
 # Documentation https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
