@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 # See https://github.com/vercel/vercel/blob/main/.github/workflows/test.yml
 # Documentation https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
